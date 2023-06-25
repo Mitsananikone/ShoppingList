@@ -1,0 +1,46 @@
+:root {
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  min-height: max-content;
+}
+
+html {
+height: 100%;
+padding: 0;
+margin: 0;
+border: 0;
+
+/* border: 5px solid black; */
+
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to bottom right, #FBF8BE, #2BAE66);
+  /* min-width: 440px; */
+  width: 100vw;
+  min-height: min-content;
+  /* border: 1px solid green; */
+}
+
+
+
+@media screen and (max-width: 440px) {
+  :root {
+    width: auto;
+    height: 100%;
+  }
+  body {
+    bottom: 0;
+    width: auto;
+    height: 100%;
+  }
+}
+
+

@@ -1,0 +1,35 @@
+{
+  "name": "shoppinglist",
+  "version": "0.1.0",
+  "homepage": "/public/",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.0.18",
+    "autoprefixer": "^10.4.14",
+    "axios": "^1.4.0",
+    "bootstrap": "^5.2.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "isomorphic-unfetch": "^4.0.2",
+    "mongodb": "^5.6.0",
+    "mongoose": "^7.2.1",
+    "next": "13.3.1",
+    "prop-types": "^15.8.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "^3.3.2"
+  },
+  "devDependencies": {
+    "checkly": "latest",
+    "ts-node": "latest",
+    "typescript": "latest"
+  }
+}
