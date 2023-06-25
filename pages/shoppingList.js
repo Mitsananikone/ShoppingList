@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const ShoppingList = ({ items }) => {
   const { user, updateUser } = useContext(UserContext);
-  const [shoppingList, setShoppingList] = useState([]);
+  const [shoppingList, setShoppingList] = useState(items || []);
   const [input, setInput] = useState("");
   const [uploadStatus, setUploadStatus] = useState("");
   const [seconds, setSeconds] = useState(3);
@@ -22,7 +22,8 @@ const ShoppingList = ({ items }) => {
         throw new Error('User ID not found');
       }
 
-      const response = await fetch(`/api/users/${userId}`);  // fetch Mit's user._id
+      const response = await fetch(`/api/user/${userId}`);  // fetch Mit's 
+      console.log("RESPONSE: " + JSON.stringify(response));
       if (response.ok) {
         const userData = await response.json();
         setShoppingList(userData.shoppingList || []);
@@ -135,11 +136,13 @@ const ShoppingList = ({ items }) => {
       <div className={styles.mainContainer}>
         <div className={styles.list_container}>
           <ul className={styles.shoppingList}>
-            {items.map((item) => (
+            {shoppingList.map((item) => (
               <li key={item._id} className={styles.shoppingItem}>
-                {item.name}
+                {item}
                 <div className={styles.cartControls}>
-                  <div className={styles.removeItem} onClick={() => handleDeleteItem(item)}> <TrashIcon className={styles.trashcan}/> </div>
+                  <div className={styles.removeItem} onClick={() => handleDeleteItem(item)}>
+                    <TrashIcon className={styles.trashcan} />
+                  </div>
                 </div>
               </li>
             ))}
@@ -151,9 +154,9 @@ const ShoppingList = ({ items }) => {
 
 
       <form onSubmit={handleSubmit} className={styles.form}>
-      <div className={styles.form_inner}>
-       
-       
+        <div className={styles.form_inner}>
+
+
 
           <input type="text" value={input} onChange={handleInputChange} className={styles.input} />
           <button type="submit" id={styles.enter}>Add</button>

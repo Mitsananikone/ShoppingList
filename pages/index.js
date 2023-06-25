@@ -45,7 +45,10 @@ export async function getStaticProps() {
     };
   } catch (error) {
     console.error(error);
-    return { props: { users: [] } };
+    return { 
+      props: { users: parsedUsers},
+      revalidate: 1,
+   };
   }
 }
 
