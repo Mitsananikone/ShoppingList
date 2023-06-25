@@ -3,8 +3,9 @@ import styles from '../styles/ShoppingList.module.css';
 import { UserContext } from '../lib/usercontext';
 import { ArrowPathIcon } from '@heroicons/react/20/solid';
 import { TrashIcon } from '@heroicons/react/24/outline';
+import axios from 'axios';
 
-const ShoppingList = () => {
+const ShoppingList = ({ items }) => {
   const { user, updateUser } = useContext(UserContext);
   const [shoppingList, setShoppingList] = useState([]);
   const [input, setInput] = useState("");
@@ -134,9 +135,9 @@ const ShoppingList = () => {
       <div className={styles.mainContainer}>
         <div className={styles.list_container}>
           <ul className={styles.shoppingList}>
-            {shoppingList.map((item, index) => (
-              <li key={index} className={styles.shoppingItem}>
-                {item.charAt(0).toUpperCase() + item.slice(1)}
+            {items.map((item) => (
+              <li key={item._id} className={styles.shoppingItem}>
+                {item.name}
                 <div className={styles.cartControls}>
                   <div className={styles.removeItem} onClick={() => handleDeleteItem(item)}> <TrashIcon className={styles.trashcan}/> </div>
                 </div>
@@ -171,3 +172,28 @@ export default ShoppingList;
 {/* <button type="button" className={styles.refresh} onClick={() => fetchShoppingList()}>
 <ArrowPathIcon className="h-10 w-10" style={{ fill: 'black', marginTop: '1em', marginBottom: '1em' }} />
 </button> */}
+
+export async function getServerSideProps() {
+  try {
+    // Fetch the items from the MongoDB database
+    const response = await axios.get('/api/users');
+    const users = response.data;
+    const items = users.map((user) => user.shoppingList).flat();
+
+    // Pass the items as props to the component
+    return {
+      props: {
+        items,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching items:', error);
+
+    // Return an empty items array if there's an error
+    return {
+      props: {
+        items: [],
+      },
+    };
+  }
+}
