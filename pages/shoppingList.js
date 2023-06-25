@@ -21,7 +21,7 @@ const ShoppingList = () => {
         throw new Error('User ID not found');
       }
 
-      const response = await fetch(`/api/user/${userId}`);  // fetch Mit's user._id
+      const response = await fetch(`/api/users/${userId}`);  // fetch Mit's user._id
       if (response.ok) {
         const userData = await response.json();
         setShoppingList(userData.shoppingList || []);
